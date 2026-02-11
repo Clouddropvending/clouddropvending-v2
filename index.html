@@ -902,7 +902,6 @@
             const contactHeading = document.getElementById('contact-heading');
             const contactSubheading = document.getElementById('contact-subheading');
 
-            const TEST_MODE = false; // change to false when going live
 
             form.addEventListener('submit', async function (e) {
               e.preventDefault();
@@ -912,19 +911,6 @@
               submitBtn.textContent = 'Submitting...';
               errorMsg.classList.remove('visible');
               const formData = new FormData(form);
-
-              // 🔥 TEST MODE — skip real submission
-              if (TEST_MODE) {
-                form.reset();
-                formFields.style.display = 'none';
-                successMsg.classList.add('visible');
-
-                // Update Heading Dynamically
-                if (contactHeading) contactHeading.textContent = "You're All Set.";
-                if (contactSubheading) contactSubheading.textContent = "Our team will reach out within 24 hours.";
-
-                return; // stops here — no fetch call
-              }
 
               try {
                 const response = await fetch(form.action, {
