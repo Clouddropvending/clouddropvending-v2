@@ -830,55 +830,114 @@
         <h2 class="fade-in-up">Ready to Upgrade Your Venue?</h2>
         <p class="fade-in-up" style="margin-bottom: 32px;">Fill out the form below or book a quick call.</p>
 
-        <form class="contact-form glass-panel fade-in-up" action="https://formspree.io/f/xojnjkqv" method="POST">
+        <form id="contact-form" class="contact-form glass-panel fade-in-up" action="https://formspree.io/f/xvzbzbyr"
+          method="POST">
           <input type="hidden" name="_subject" value="New Cloud Drop Placement Request">
           <input type="hidden" name="_captcha" value="false">
-          <!-- Update the value below with your production URL after deployment -->
-          <!-- Example: https://clouddropvending-v2.vercel.app/thank-you.html -->
-          <input type="hidden" name="_next" value="https://PLACEHOLDER-FOR-VERCEL-URL.vercel.app/thank-you.html">
 
-          <div class="form-group">
-            <label for="venueName">Venue Name</label>
-            <input type="text" id="venueName" name="venueName" placeholder="e.g. Club Neon" required>
-          </div>
-          <div class="form-group">
-            <label for="contactName">Contact Name</label>
-            <input type="text" id="contactName" name="contactName" placeholder="Your Name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email or Phone</label>
-            <input type="text" id="email" name="email" placeholder="how to reach you" required>
-          </div>
-          <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" id="location" name="location" placeholder="City / Neighborhood" required>
-          </div>
-          <div class="form-group">
-            <label for="method">Preferred Contact</label>
-            <select id="method" name="method">
-              <option value="email">Email</option>
-              <option value="phone">Phone Call</option>
-              <option value="text">Text Message</option>
-            </select>
+          <div id="form-fields">
+            <div class="form-group">
+              <label for="venueName">Venue Name</label>
+              <input type="text" id="venueName" name="venueName" placeholder="e.g. Club Neon" required>
+            </div>
+            <div class="form-group">
+              <label for="contactName">Contact Name</label>
+              <input type="text" id="contactName" name="contactName" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email or Phone</label>
+              <input type="text" id="email" name="email" placeholder="how to reach you" required>
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" name="location" placeholder="City / Neighborhood" required>
+            </div>
+            <div class="form-group">
+              <label for="method">Preferred Contact</label>
+              <select id="method" name="method">
+                <option value="email">Email</option>
+                <option value="phone">Phone Call</option>
+                <option value="text">Text Message</option>
+              </select>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Request
+              Placement</button>
+
+            <div id="form-error" class="form-error-message">
+              Something went wrong. Please try again.
+            </div>
+
+            <div class="form-footer">
+              <p>Serving Vancouver & Greater Vancouver</p>
+              <p style="font-size: 0.85rem; opacity: 0.6;">Typical response: within 24 hours</p>
+            </div>
           </div>
 
-          <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Request
-            Placement</button>
+          <div id="form-success" class="form-success-message">
+            <div class="form-success-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3>Request received.</h3>
+            <p>We’ll reach out within 24 hours.</p>
+          </div>
 
           <script>
-            const form = document.querySelector('.contact-form');
+            const form = document.getElementById('contact-form');
             const submitBtn = document.getElementById('submit-btn');
+            const formFields = document.getElementById('form-fields');
+            const successMsg = document.getElementById('form-success');
+            const errorMsg = document.getElementById('form-error');
 
-            form.addEventListener('submit', function () {
+            const TEST_MODE = true; // change to false when going live
+
+            form.addEventListener('submit', async function (e) {
+              e.preventDefault();
+
+              // Double-submit protection
               submitBtn.disabled = true;
               submitBtn.textContent = 'Submitting...';
+              errorMsg.classList.remove('visible');
+              const formData = new FormData(form);
+
+              // 🔥 TEST MODE — skip real submission
+              if (TEST_MODE) {
+                form.reset();
+                document.getElementById('form-fields').style.display = 'none';
+                successMsg.classList.add('visible');
+                return; // stops here — no fetch call
+              }
+
+              try {
+                const response = await fetch(form.action, {
+
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                    'Accept': 'application/json'
+                  }
+                });
+
+                if (response.ok) {
+                  // Success flow
+                  formFields.style.display = 'none';
+                  successMsg.classList.add('visible');
+                  form.reset();
+                } else {
+                  // Server error
+                  throw new Error('Form submission failed');
+                }
+              } catch (error) {
+                // Failure flow
+                errorMsg.classList.add('visible');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Request Placement';
+              }
             });
           </script>
-
-          <div class="form-footer">
-            <p>Serving Vancouver & Greater Vancouver</p>
-            <p style="font-size: 0.85rem; opacity: 0.6;">Typical response: within 24 hours</p>
-          </div>
         </form>
 
       </div>
