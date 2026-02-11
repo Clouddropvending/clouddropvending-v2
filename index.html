@@ -830,9 +830,13 @@
         <h2 class="fade-in-up">Ready to Upgrade Your Venue?</h2>
         <p class="fade-in-up" style="margin-bottom: 32px;">Fill out the form below or book a quick call.</p>
 
-        <form class="contact-form glass-panel fade-in-up" action="https://formspree.io/f/xvzbzbyr" method="POST">
+        <form class="contact-form glass-panel fade-in-up" action="https://formspree.io/f/xojnjkqv" method="POST">
           <input type="hidden" name="_subject" value="New Cloud Drop Placement Request">
           <input type="hidden" name="_captcha" value="false">
+          <!-- Update the value below with your production URL after deployment -->
+          <!-- Example: https://clouddropvending-v2.vercel.app/thank-you.html -->
+          <input type="hidden" name="_next" value="https://PLACEHOLDER-FOR-VERCEL-URL.vercel.app/thank-you.html">
+
           <div class="form-group">
             <label for="venueName">Venue Name</label>
             <input type="text" id="venueName" name="venueName" placeholder="e.g. Club Neon" required>
@@ -858,8 +862,19 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Request
+          <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Request
             Placement</button>
+
+          <script>
+            const form = document.querySelector('.contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+
+            form.addEventListener('submit', function () {
+              submitBtn.disabled = true;
+              submitBtn.textContent = 'Submitting...';
+            });
+          </script>
+
           <div class="form-footer">
             <p>Serving Vancouver & Greater Vancouver</p>
             <p style="font-size: 0.85rem; opacity: 0.6;">Typical response: within 24 hours</p>
