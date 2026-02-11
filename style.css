@@ -1837,7 +1837,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .contact-form input,
-.contact-form select {
+.contact-form select,
+.contact-form textarea {
     width: 100%;
     padding: 16px;
     background: rgba(0, 0, 0, 0.3);
@@ -1850,7 +1851,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .contact-form input:focus,
-.contact-form select:focus {
+.contact-form select:focus,
+.contact-form textarea:focus {
     outline: none;
     border-color: var(--accent-blue);
     box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);

@@ -862,6 +862,13 @@
               </select>
             </div>
 
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="4"
+                placeholder="Tell us a bit about your business — peak hours, crowd size, or anything we should know."
+                required></textarea>
+            </div>
+
             <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Request
               Placement</button>
 
@@ -895,7 +902,7 @@
             const contactHeading = document.getElementById('contact-heading');
             const contactSubheading = document.getElementById('contact-subheading');
 
-            const TEST_MODE = true; // change to false when going live
+            const TEST_MODE = false; // change to false when going live
 
             form.addEventListener('submit', async function (e) {
               e.preventDefault();
