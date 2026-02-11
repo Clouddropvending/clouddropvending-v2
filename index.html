@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cloud Drop Vending | Future of Nightlife</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Signature Animation: Ambient Background -->
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <main>
+    <!-- Hero Section -->
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container hero-grid-container">
+        <!-- Left Side Machine -->
+        <div class="hero-image-wrapper left fade-in-up">
+          <div class="hero-machine-wrap">
+            <img class="hero-machine hero-machine--left" src="assets/hero/hero-machine-left.png"
+              alt="Cloud Drop wall-mounted unit">
+          </div>
+        </div>
+
+        <!-- Centered Hero Text Group -->
+        <div class="hero-content fade-in-up">
+          <div class="hero-brand">
+            <img src="assets/hero/hero-logo.png" alt="Cloud Drop Logo" class="hero-logo" width="260" height="65">
+            <span class="hero-eyebrow">Cloud Drop Vending</span>
+          </div>
+          <h1>Nightlife Technology <br /> from the Future.</h1>
+          <p style="transition-delay: 0.1s; max-width: 600px; margin: 0 auto 40px;">
+            Automated retail that feels like a premium experience. Increase revenue and delight guests with zero staff
+            involvement.
+          </p>
+          <div class="cta-group" style="transition-delay: 0.2s;">
+            <a href="#contact" class="btn btn-primary">Get a machine in my venue</a>
+            <a href="#products" class="btn btn-secondary">See product lineup</a>
+            <div class="micro-line">We install. We stock. You earn.</div>
+          </div>
+        </div>
+
+        <!-- Right Side Machine -->
+        <div class="hero-image-wrapper right fade-in-up">
+          <div class="hero-machine-wrap">
+            <img class="hero-machine hero-machine--right" src="assets/hero/hero-machine-right.png"
+              alt="Cloud Drop wall-mounted unit">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="trust-strip fade-in-up" style="transition-delay: 0.3s;">
+      <div class="container">
+        <div class="trust-header">
+          <p class="trust-label">Partners</p>
+          <p class="trust-subtitle">Trusted Industry Partners</p>
+        </div>
+        <div class="logos-grid">
+          <div class="partner-pill partner-pill--fog">
+            <div class="partner-logo">
+              <img src="assets/partners/partner-01.png" alt="Fog Logo">
+            </div>
+          </div>
+          <div class="partner-pill partner-pill--aura">
+            <div class="partner-logo">
+              <img src="assets/partners/partner-02.png" alt="Aura Logo">
+            </div>
+          </div>
+          <div class="partner-pill partner-pill--cabana">
+            <div class="partner-logo">
+              <img src="assets/partners/partner-03.png" alt="Cabana Logo">
+            </div>
+          </div>
+          <div class="partner-pill partner-pill--celebrity">
+            <div class="partner-logo">
+              <img src="assets/partners/partner-04.png" alt="Celebrity Logo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hardware Showcase -->
+    <section class="hardware-section section-padding" id="hardware">
+      <div class="container">
+        <div class="section-header fade-in-up">
+          <h2>The Hardware.</h2>
+          <p class="subheadline">Elevated design. Zero footprint.</p>
+        </div>
+
+        <div class="hardware-grid single-machine">
+          <!-- Featured Card: Wall-Mounted -->
+          <div class="hardware-card fade-in-up"
+            onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+            <div class="card-visual">
+              <img src="assets/hero/machine.png"
+                alt="Cloud Drop Wall-Mounted Vending Machine - Compact and flush installation for space efficiency"
+                class="hardware-img static" loading="lazy" decoding="async" width="620">
+            </div>
+            <div class="card-content">
+              <h3>Wall-Mounted Unit</h3>
+              <p>A flagship experience with a minimal footprint. Designed to blend seamlessly into luxury interiors.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hidden Value Section (Indirect Revenue) - MOVED HERE -->
+    <section class="indirect-revenue section-padding">
+      <div class="container">
+        <div class="section-header fade-in-up">
+          <div class="subtle-pill">Revenue you’re currently losing</div>
+          <h2>The Most Overlooked Revenue Opportunity in Nightlife.</h2>
+          <p class="subheadline"><span class="revenue-highlight">10%</span> revenue share is just the beginning.</p>
+        </div>
+
+        <div class="revenue-grid">
+          <!-- Left: Business Logic -->
+          <div class="revenue-text animate-on-scroll fade-reveal">
+            <div class="logic-block">
+              <p class="problem-text">When guests leave your venue to buy essentials, many don’t come back.</p>
+              <p class="bridge-text-simple">Keeping essentials inside the venue keeps guests inside.</p>
+            </div>
+
+            <!-- Impact Snapshot Card -->
+            <div class="impact-snapshot glass-panel">
+              <div class="snapshot-header">
+                <h4 class="snapshot-title">Nightly Impact Snapshot</h4>
+                <ul class="snapshot-list qualitative">
+                  <li>Guests stay longer</li>
+                  <li>Re-entry drop-off is eliminated</li>
+                  <li>Bar and bottle service see increased spend</li>
+                </ul>
+              </div>
+
+              <div class="estimate-scenario">
+                <h5 class="estimate-title">Example Scenario (Estimate)</h5>
+                <p class="estimate-intro">On a typical night:</p>
+                <ul class="estimate-list">
+                  <li><strong>10–15</strong> guests leave to buy essentials elsewhere</li>
+                  <li>They’re often not alone</li>
+                  <li>Small exits compound over the night</li>
+                </ul>
+                <p class="lost-revenue">
+                  At an average <strong>$40–$70</strong> spend per guest, that can mean
+                  <span class="lost-amount">$1,600–$5,330 in lost revenue — in a single night.</span>
+                </p>
+                <!-- Range Bar -->
+                <div class="estimate-range-bar"></div>
+                <p class="estimate-disclaimer">Illustrative estimate — varies by venue/night.</p>
+              </div>
+
+              <div class="snapshot-footer">
+                More time inside → more drinks, more bottles, more rounds.
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Conceptual Graph -->
+          <div class="revenue-visual glass-panel animate-on-scroll" style="transition-delay: 0.1s;">
+            <div class="visual-header">
+              <h4 class="visual-title">Guest Retention Effect</h4>
+              <p class="visual-subtitle">Keeping guests inside the venue increases time spent — and total spend.</p>
+            </div>
+            <div class="chart-container">
+              <span class="axis-hint y-hint">Total guest spend</span>
+              <div class="subtle-axes"></div>
+
+              <svg viewBox="0 0 500 250" class="trend-graph" preserveAspectRatio="none">
+                <!-- Baseline (Flat/Plateau) -->
+                <path d="M 0,200 C 100,200 250,200 500,195" class="line-flat" />
+                <text x="490" y="188" class="graph-text flat" text-anchor="end">Without in-venue essentials</text>
+
+                <!-- Growth (Trend) -->
+                <path d="M 0,200 C 150,200 250,150 500,50" class="line-growth animate-draw" pathLength="1" />
+
+                <!-- Traveling Glow Effect (energy segment) -->
+                <path d="M 0,200 C 150,200 250,150 500,50" class="line-growth-glow traveling-glow" pathLength="1" />
+
+                <text x="495" y="45" class="graph-text growth" text-anchor="end">With Cloud Drop</text>
+
+                <!-- Defs for Gradient -->
+                <defs>
+                  <linearGradient id="growthGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style="stop-color:var(--accent-blue); stop-opacity:0.2" />
+                    <stop offset="100%" style="stop-color:var(--accent-blue); stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="axis-hints-x">
+                <span>Earlier in the night</span>
+                <span>Later in the night</span>
+              </div>
+            </div>
+            <div class="chart-footer-takeaway">
+              <p class="chart-caption">Time spent inside directly impacts total guest spend.</p>
+              <div class="takeaway-line">Longer stays → more rounds → higher total spend.</div>
+            </div>
+
+            <!-- Relocated Payoff Statement -->
+            <div class="conclusion-box mini payoff-card">
+              <p class="summary-line">The machine pays for itself — before revenue share is even counted.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Revenue calculator section -->
+    <section class="revenue-calculator section-padding" id="calculator">
+      <div class="container">
+        <div class="section-header fade-in-up">
+          <div class="subtle-pill">Venue Profit Engine</div>
+          <h2>Revenue Impact Calculator.</h2>
+          <p class="subheadline">Estimate your monthly earnings and retained guest spend.</p>
+        </div>
+
+        <div class="calculator-container">
+          <!-- Inputs Column -->
+          <div class="calculator-inputs fade-in-up" style="transition-delay: 0.2s;">
+            <!-- Group 1: Machine Income -->
+            <div class="input-group-wrapper glass-panel">
+              <h4 class="input-group-title">Machine Income Parameters</h4>
+              <div class="calc-input">
+                <div class="label-row">
+                  <label for="guests_per_night">Avg Guests per Night</label>
+                  <input type="number" id="guests_per_night_val" value="600">
+                </div>
+                <input type="range" id="guests_per_night" min="100" max="3000" step="50" value="600">
+                <p class="helper-text">Total guests across the full night, not simultaneous.</p>
+              </div>
+
+              <div class="calc-input">
+                <div class="label-row">
+                  <label for="nights_per_week">Nights Open per Week</label>
+                  <input type="number" id="nights_per_week_val" value="3">
+                </div>
+                <input type="range" id="nights_per_week" min="1" max="7" step="1" value="3">
+                <p class="helper-text">Number of days per week the venue is operating.</p>
+              </div>
+
+              <div class="calc-input">
+                <div class="label-row">
+                  <label for="purchase_rate">Purchase Rate (%)</label>
+                  <input type="number" id="purchase_rate_val" step="0.5" value="4">
+                </div>
+                <input type="range" id="purchase_rate" min="1" max="15" step="0.5" value="4">
+                <p class="helper-text">% of guests who buy something from the machine.</p>
+              </div>
+            </div>
+
+            <!-- Group 2: People Staying Inside -->
+            <div class="input-group-wrapper glass-panel" style="margin-top: 24px;">
+              <h4 class="input-group-title">People Staying Inside Parameters</h4>
+              <div class="calc-input">
+                <div class="label-row">
+                  <label for="group_prevent_rate">Group Prevent Rate (%)</label>
+                  <input type="number" id="group_prevent_rate_val" value="50">
+                </div>
+                <input type="range" id="group_prevent_rate" min="5" max="70" step="5" value="50">
+                <p class="helper-text">Typical range: 40–65%. Most nightclubs average around 50–55%.</p>
+              </div>
+
+              <div class="calc-input">
+                <div class="label-row">
+                  <label for="avg_group_size">Average Group Size</label>
+                  <input type="number" id="avg_group_size_val" step="0.5" value="3.0">
+                </div>
+                <input type="range" id="avg_group_size" min="2.0" max="6.0" step="0.1" value="3.0">
+                <p class="helper-text">Typical: 2.5–3.5 persons per group.</p>
+              </div>
+            </div>
+
+            <details class="assumptions-note glass-panel">
+              <summary>View Model Details & Assumptions</summary>
+              <div class="details-content">
+                <p><strong>Fixed Parameters:</strong></p>
+                <ul
+                  style="list-style: none; padding: 0; margin-bottom: 12px; font-size: 0.8rem; opacity: 0.8; line-height: 1.6;">
+                  <li><strong>• Venue Revenue Share:</strong> 10%</li>
+                  <li><strong>• Avg Machine Spend:</strong> $35 (based on product mix)</li>
+                </ul>
+                <p><strong>Monthly totals</strong> are calculated based on 4.33 weeks per month.</p>
+                <p><strong>Group Retention Model:</strong> We assume a percentage of users who find what they need at
+                  our machine would have otherwise left the venue. Preventing one person from leaving keeps their entire
+                  group in your venue longer (calculated as: prevented groups × avg group size × spend per person).</p>
+              </div>
+            </details>
+          </div>
+
+          <!-- Results Column -->
+          <div class="calculator-results fade-in-up" style="transition-delay: 0.3s;">
+            <div class="impact-card glass-panel main-impact">
+              <div class="impact-header">
+                <div class="impact-meta-row">
+                  <span class="impact-label">Total Monthly Venue Impact</span>
+                  <span class="share-badge">10% Fixed Share</span>
+                </div>
+                <h3 id="total_impact_val">$0,000</h3>
+              </div>
+              <div class="impact-body">
+                <p>This is the estimated total financial value Cloud Drop brings to your venue every month.</p>
+              </div>
+            </div>
+
+            <div class="results-grid">
+              <div class="impact-card glass-panel secondary-impact">
+                <span class="impact-label">Monthly Venue Share</span>
+                <h4 id="monthly_venue_share_val">$0,000</h4>
+                <p class="impact-desc">Direct profit from machine transactions.</p>
+              </div>
+              <div class="impact-card glass-panel secondary-impact">
+                <span class="impact-label">Monthly Added Bar Rev</span>
+                <h4 id="monthly_bar_rev_val">$0,000</h4>
+                <p class="impact-desc">Revenue from guests who stayed longer.</p>
+              </div>
+            </div>
+
+            <div class="breakdown-card glass-panel">
+              <h5 class="breakdown-title">Estimated Breakdown</h5>
+              <div class="breakdown-table">
+                <div class="breakdown-row">
+                  <span>Per Night</span>
+                  <span id="per_night_total_val">$000</span>
+                </div>
+                <div class="breakdown-row">
+                  <span>Weekly Total</span>
+                  <span id="weekly_total_val">$0,000</span>
+                </div>
+              </div>
+              <p class="breakdown-helper">Based on <span id="summary_guests">600</span> guests over <span
+                  id="summary_nights">3</span> nights/week.</p>
+            </div>
+
+            <div class="cta-card glass-panel">
+              <h4>Ready to start?</h4>
+              <p>Get your custom revenue projection during a 10-minute placement call.</p>
+              <a href="#contact" class="btn btn-primary" style="width: 100%;">Book a Call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Mobile Results Tray -->
+    <div class="sticky-results-tray glass-panel" id="mobileResultsTray">
+      <div class="tray-content">
+        <div class="tray-summary">
+          <div class="tray-metric primary">
+            <span class="tray-label">Total Impact</span>
+            <span class="tray-value" id="tray_total">$0,000</span>
+          </div>
+          <div class="tray-metric secondary">
+            <span class="tray-label">Venue Share</span>
+            <span class="tray-value" id="tray_share">$000</span>
+          </div>
+          <div class="tray-metric secondary">
+            <span class="tray-label">Bar Revenue</span>
+            <span class="tray-value" id="tray_bar">$000</span>
+          </div>
+          <div class="tray-toggle">
+            <span class="toggle-icon"></span>
+          </div>
+        </div>
+
+        <div class="tray-full-breakdown">
+          <div class="breakdown-grid">
+            <div class="breakdown-item">
+              <span class="item-label">Per Night Impact</span>
+              <span class="item-value" id="tray_night">$000</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="item-value" id="tray_week">$0,000</span>
+              <span class="item-label">Weekly Total</span>
+            </div>
+          </div>
+          <p class="tray-hint">Projections based on 4.33 weeks per month.</p>
+        </div>
+      </div>
+      <div class="tray-collapsed-hint">Tap to see full breakdown</div>
+    </div>
+
+    </div>
+
+    <!-- Product Showcase -->
+    <section id="products" class="product-showcase section-padding">
+      <div class="container">
+        <h2 class="fade-in-up">Curated Essentials.</h2>
+        <div class="product-track-wrapper fade-in-up" style="transition-delay: 0.1s;">
+          <div class="product-track">
+
+            <!-- FIRST SET (4 PRODUCTS) -->
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #333, #444);">
+                <img src="assets/products/fog-series-16.jpg" alt="Fog Series" class="product-img" loading="lazy"
+                  decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Fog Series 16</h3>
+                <p>Premium Disposable Vape</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #1e3a8a, #3b82f6);">
+                <img src="assets/products/morning-recovery.jpg" alt="Morning Recovery" class="product-img"
+                  loading="lazy" decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Morning Recovery</h3>
+                <p>Liver Detox Shot</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #d97706, #f59e0b);">
+                <img src="assets/products/disposable-camera.jpg" alt="Disposable Camera" class="product-img"
+                  loading="lazy" decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Disposable Camera</h3>
+                <p>18 Exposures, Flash</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #059669, #10b981);">
+                <img src="assets/products/power-bank.jpg" alt="Power Bank" class="product-img" loading="lazy"
+                  decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Power Bank</h3>
+                <p>Fast Charging, Pre-charged</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel curated-card--multi">
+              <div class="product-img-placeholder">
+                <div class="multi-grid">
+                  <div class="multi-tile">
+                    <img src="assets/products/tampons.jpg" alt="Tampons" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/cologne.jpg" alt="Cologne" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/advil.jpg" alt="Advil" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/protein-bar.jpg" alt="Protein Bar" loading="lazy" width="48" height="48">
+                  </div>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3>Other Essentials</h3>
+                <p>Tampons • Cologne • Advil • Protein Bar</p>
+              </div>
+            </div>
+
+            <!-- SECOND SET (DUPLICATE) -->
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #333, #444);">
+                <img src="assets/products/fog-series-16.jpg" alt="Fog Series" class="product-img" loading="lazy"
+                  decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Fog Series 16</h3>
+                <p>Premium Disposable Vape</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #1e3a8a, #3b82f6);">
+                <img src="assets/products/morning-recovery.jpg" alt="Morning Recovery" class="product-img"
+                  loading="lazy" decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Morning Recovery</h3>
+                <p>Liver Detox Shot</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #d97706, #f59e0b);">
+                <img src="assets/products/disposable-camera.jpg" alt="Disposable Camera" class="product-img"
+                  loading="lazy" decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Disposable Camera</h3>
+                <p>18 Exposures, Flash</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #059669, #10b981);">
+                <img src="assets/products/power-bank.jpg" alt="Power Bank" class="product-img" loading="lazy"
+                  decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Power Bank</h3>
+                <p>Fast Charging, Pre-charged</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel curated-card--multi">
+              <div class="product-img-placeholder">
+                <div class="multi-grid">
+                  <div class="multi-tile">
+                    <img src="assets/products/tampons.jpg" alt="Tampons" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/cologne.jpg" alt="Cologne" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/advil.jpg" alt="Advil" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/protein-bar.jpg" alt="Protein Bar" loading="lazy" width="48" height="48">
+                  </div>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3>Other Essentials</h3>
+                <p>Tampons • Cologne • Advil • Protein Bar</p>
+              </div>
+            </div>
+
+            <!-- THIRD SET (DUPLICATE FOR SEAMLESS BIDIRECTIONAL LOOP) -->
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #333, #444);">
+                <img src="assets/products/fog-series-16.jpg" alt="Fog Series" class="product-img" loading="lazy"
+                  decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Fog Series 16</h3>
+                <p>Premium Disposable Vape</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #1e3a8a, #3b82f6);">
+                <img src="assets/products/morning-recovery.jpg" alt="Morning Recovery" class="product-img"
+                  loading="lazy" decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Morning Recovery</h3>
+                <p>Liver Detox Shot</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #d97706, #f59e0b);">
+                <img src="assets/products/disposable-camera.jpg" alt="Disposable Camera" class="product-img"
+                  loading="lazy" decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Disposable Camera</h3>
+                <p>18 Exposures, Flash</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel">
+              <div class="product-img-placeholder" style="background: linear-gradient(45deg, #059669, #10b981);">
+                <img src="assets/products/power-bank.jpg" alt="Power Bank" class="product-img" loading="lazy"
+                  decoding="async" width="280" height="240">
+              </div>
+              <div class="product-info">
+                <h3>Power Bank</h3>
+                <p>Fast Charging, Pre-charged</p>
+              </div>
+            </div>
+
+            <div class="product-card glass-panel curated-card--multi">
+              <div class="product-img-placeholder">
+                <div class="multi-grid">
+                  <div class="multi-tile">
+                    <img src="assets/products/tampons.jpg" alt="Tampons" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/cologne.jpg" alt="Cologne" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/advil.jpg" alt="Advil" loading="lazy" width="48" height="48">
+                  </div>
+                  <div class="multi-tile">
+                    <img src="assets/products/protein-bar.jpg" alt="Protein Bar" loading="lazy" width="48" height="48">
+                  </div>
+                </div>
+              </div>
+              <div class="product-info">
+                <h3>Other Essentials</h3>
+                <p>Tampons • Cologne • Advil • Protein Bar</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What We Do Section -->
+    <section class="what-we-do section-padding">
+      <div class="container">
+        <div class="features-grid">
+          <div class="feature-card glass-panel fade-in-up">
+            <div class="icon-box">⚡</div>
+            <h3>Install & Maintain</h3>
+            <p>We handle delivery, installation, and 24/7 maintenance.</p>
+          </div>
+          <div class="feature-card glass-panel fade-in-up" style="transition-delay: 0.1s;">
+            <div class="icon-box">📦</div>
+            <h3>Stock Products</h3>
+            <p>Automated restocking of premium essentials.</p>
+          </div>
+          <div class="feature-card glass-panel fade-in-up" style="transition-delay: 0.2s;">
+            <div class="icon-box">💳</div>
+            <h3>Cashless Payments</h3>
+            <p>Apple Pay, Google Pay, and Tap-to-Pay enabled.</p>
+          </div>
+          <div class="feature-card glass-panel fade-in-up" style="transition-delay: 0.3s;">
+            <div class="icon-box">📈</div>
+            <h3>Revenue Share</h3>
+            <p>Earn passive income from every transaction.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Clubs Choose Us -->
+    <section class="why-us section-padding">
+      <div class="container">
+        <h2 class="fade-in-up">Why Partner With Us?</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card glass-panel fade-in-up">
+            <h3>New Revenue Stream</h3>
+            <p>Turn unused space into a profitable asset with zero overhead.</p>
+          </div>
+          <div class="benefit-card glass-panel fade-in-up" style="transition-delay: 0.1s;">
+            <h3>Better Guest Experience</h3>
+            <p>Keep patrons happy and on-site with essential products.</p>
+          </div>
+          <div class="benefit-card glass-panel fade-in-up" style="transition-delay: 0.2s;">
+            <h3>Zero Staff Workload</h3>
+            <p>We handle everything. Your team focuses on service.</p>
+          </div>
+          <div class="benefit-card glass-panel fade-in-up" style="transition-delay: 0.3s;">
+            <h3>High-Demand Products</h3>
+            <p>Curated winners like Morning Recovery and vapes.</p>
+          </div>
+          <div class="benefit-card glass-panel fade-in-up" style="transition-delay: 0.4s;">
+            <h3>Fast Support</h3>
+            <p>24/7 restocking and maintenance response.</p>
+          </div>
+        </div>
+        <!-- Outcomes Row -->
+        <div class="outcomes-row fade-in-up" style="transition-delay: 0.5s;">
+          <span>High-margin items</span>
+          <span class="separator">•</span>
+          <span>Peak-hours optimized</span>
+          <span class="separator">•</span>
+          <span>Monthly payouts</span>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- How It Works -->
+    <section class="how-it-works section-padding">
+      <div class="container">
+        <h2 class="fade-in-up">Simple Setup.</h2>
+        <div class="steps-grid">
+          <div class="step-card glass-panel fade-in-up">
+            <div class="step-number">01</div>
+            <div class="step-content">
+              <h3>Placement & Setup</h3>
+              <p>We identify the perfect spot and install the machine in minutes.</p>
+            </div>
+          </div>
+          <div class="step-card glass-panel fade-in-up" style="transition-delay: 0.1s;">
+            <div class="step-number">02</div>
+            <div class="step-content">
+              <h3>Stocking & Monitoring</h3>
+              <p>Smart telemetry tracks inventory for automated, timely restocking visits.</p>
+            </div>
+          </div>
+          <div class="step-card glass-panel fade-in-up" style="transition-delay: 0.2s;">
+            <div class="step-number">03</div>
+            <div class="step-content">
+              <h3>Payouts & Support</h3>
+              <p>Receive automatic monthly revenue share deposits and 24/7 support.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compliance Section -->
+    <section class="compliance-section section-padding" id="compliance">
+      <div class="container" style="max-width: 900px;">
+        <div class="glass-panel compliance-card fade-in-up">
+          <div class="compliance-grid">
+            <div class="compliance-info">
+              <div class="subtle-pill"
+                style="margin-bottom: 12px; border-color: rgba(0, 240, 255, 0.3); color: var(--accent-blue);">Certified
+                & Protected</div>
+              <h2>Fully Licensed & Compliant.</h2>
+              <div class="compliance-stamps">
+                <div class="stamp-item">
+                  <div class="stamp-inner">
+                    <span class="stamp-label">BC Registered</span>
+                    <span class="stamp-sub">British Columbia</span>
+                  </div>
+                </div>
+                <div class="stamp-item">
+                  <div class="stamp-inner">
+                    <span class="stamp-label">Fully Insured</span>
+                    <span class="stamp-sub">Liability Coverage</span>
+                  </div>
+                </div>
+                <div class="stamp-item">
+                  <div class="stamp-inner">
+                    <span class="stamp-label">Vancouver Coastal Health</span>
+                    <span class="stamp-sub">Licensed & Compliant</span>
+                  </div>
+                </div>
+              </div>
+              <p>We handle the complexities so you don't have to. Cloud Drop Vending takes full responsibility for all
+                regulatory, licensing, and compliance requirements associated with our machines.</p>
+            </div>
+            <div class="compliance-details">
+              <div class="compliance-item">
+                <h4>Comprehensive Coverage</h4>
+                <p>Our operations are fully licensed, certified, and backed by comprehensive liability insurance for
+                  every placement.</p>
+              </div>
+              <div class="compliance-item">
+                <h4>Zero Venue Burden</h4>
+                <p>All legal and regulatory responsibilities stay with us. Your venue carries no compliance or liability
+                  risk by hosting a Cloud Drop.</p>
+              </div>
+            </div>
+          </div>
+          <div class="compliance-footer">
+            <p>Documentation and certifications are available upon request during the placement process.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ / Trust -->
+    <section class="faq section-padding">
+      <div class="container" style="max-width: 800px;">
+        <h2 class="fade-in-up">Common Questions.</h2>
+
+        <div class="accordion fade-in-up">
+          <div class="accordion-item glass-panel">
+            <button class="accordion-header" aria-expanded="false">
+              <span>How long does installation take?</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="accordion-content">
+              <p>Installation typically takes 30-60 minutes and can be scheduled outside your operating hours to
+                avoid
+                disruption.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-panel">
+            <button class="accordion-header" aria-expanded="false">
+              <span>How often do you restock?</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="accordion-content">
+              <p>Our smart machines alert us when stock is low. We typically restock as needed based on
+                demand.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-panel">
+            <button class="accordion-header" aria-expanded="false">
+              <span>What is the revenue share model?</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="accordion-content">
+              <p>We offer a standard <strong>10%</strong> revenue share on gross sales for all partner venues. This
+                model is simple, transparent, and aligned to maximize long-term revenue for both sides.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item glass-panel">
+            <button class="accordion-header" aria-expanded="false">
+              <span>Who handles support and maintenance?</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="accordion-content">
+              <p>Cloud Drop handles 100% of support and maintenance. Your staff never needs to touch the machine.
+              </p>
+            </div>
+          </div>
+          <div class="accordion-item glass-panel">
+            <button class="accordion-header" aria-expanded="false">
+              <span>How are payments handled?</span>
+              <span class="icon">+</span>
+            </button>
+            <div class="accordion-content">
+              <p>Customers pay via card or mobile wallet. We issue direct deposit payouts on a scheduled basis,
+                agreed
+                upon in advance between Cloud Drop and the venue. Payment terms are set upfront so there are no
+                surprises.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Conversion -->
+    <section id="contact" class="contact section-padding">
+      <div class="container" style="max-width: 600px;">
+        <h2 class="fade-in-up">Ready to Upgrade Your Venue?</h2>
+        <p class="fade-in-up" style="margin-bottom: 32px;">Fill out the form below or book a quick call.</p>
+
+        <form class="contact-form glass-panel fade-in-up" action="https://formspree.io/f/xvzbzbyr" method="POST">
+          <input type="hidden" name="_subject" value="New Cloud Drop Placement Request">
+          <input type="hidden" name="_captcha" value="false">
+          <div class="form-group">
+            <label for="venueName">Venue Name</label>
+            <input type="text" id="venueName" name="venueName" placeholder="e.g. Club Neon" required>
+          </div>
+          <div class="form-group">
+            <label for="contactName">Contact Name</label>
+            <input type="text" id="contactName" name="contactName" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email or Phone</label>
+            <input type="text" id="email" name="email" placeholder="how to reach you" required>
+          </div>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="City / Neighborhood" required>
+          </div>
+          <div class="form-group">
+            <label for="method">Preferred Contact</label>
+            <select id="method" name="method">
+              <option value="email">Email</option>
+              <option value="phone">Phone Call</option>
+              <option value="text">Text Message</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 16px;">Request
+            Placement</button>
+          <div class="form-footer">
+            <p>Serving Vancouver & Greater Vancouver</p>
+            <p style="font-size: 0.85rem; opacity: 0.6;">Typical response: within 24 hours</p>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- Footer (New) -->
+    <footer class="site-footer">
+      <div class="container"
+        style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div class="footer-left">
+          <span style="font-weight: 600; color: #fff;">Cloud Drop Vending</span>
+          <span style="color: var(--text-muted); margin-left: 12px; font-size: 0.9rem;">&copy; 2025</span>
+        </div>
+        <div class="footer-right">
+          <a href="#" class="footer-link">Instagram</a>
+          <a href="mailto:hello@clouddrop.com" class="footer-link">Email Us</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+      &uarr;
+    </button>
+
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>
