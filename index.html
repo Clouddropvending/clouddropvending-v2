@@ -827,8 +827,9 @@
     <!-- Contact / Conversion -->
     <section id="contact" class="contact section-padding">
       <div class="container" style="max-width: 600px;">
-        <h2 class="fade-in-up">Ready to Upgrade Your Venue?</h2>
-        <p class="fade-in-up" style="margin-bottom: 32px;">Fill out the form below or book a quick call.</p>
+        <h2 id="contact-heading" class="fade-in-up">Ready to Upgrade Your Venue?</h2>
+        <p id="contact-subheading" class="fade-in-up" style="margin-bottom: 32px;">Fill out the form below or book a
+          quick call.</p>
 
         <form id="contact-form" class="contact-form glass-panel fade-in-up" action="https://formspree.io/f/xvzbzbyr"
           method="POST">
@@ -891,6 +892,8 @@
             const formFields = document.getElementById('form-fields');
             const successMsg = document.getElementById('form-success');
             const errorMsg = document.getElementById('form-error');
+            const contactHeading = document.getElementById('contact-heading');
+            const contactSubheading = document.getElementById('contact-subheading');
 
             const TEST_MODE = true; // change to false when going live
 
@@ -906,8 +909,13 @@
               // 🔥 TEST MODE — skip real submission
               if (TEST_MODE) {
                 form.reset();
-                document.getElementById('form-fields').style.display = 'none';
+                formFields.style.display = 'none';
                 successMsg.classList.add('visible');
+
+                // Update Heading Dynamically
+                if (contactHeading) contactHeading.textContent = "You're All Set.";
+                if (contactSubheading) contactSubheading.textContent = "Our team will reach out within 24 hours.";
+
                 return; // stops here — no fetch call
               }
 
@@ -925,6 +933,11 @@
                   // Success flow
                   formFields.style.display = 'none';
                   successMsg.classList.add('visible');
+
+                  // Update Heading Dynamically
+                  if (contactHeading) contactHeading.textContent = "You're All Set.";
+                  if (contactSubheading) contactSubheading.textContent = "Our team will reach out within 24 hours.";
+
                   form.reset();
                 } else {
                   // Server error
