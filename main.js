@@ -114,54 +114,37 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --------------------------------------------------------------------------
-    // 4. Horizontal Product Track - Hybrid Interaction Engine (Manual + Auto)
+    // 4. Horizontal Product Track - CSS Marquee Controller (CURATED MARQUEE REWORK)
     // --------------------------------------------------------------------------
     const trackWrapper = document.querySelector('.product-track-wrapper');
     const productTrack = document.querySelector('.product-track');
 
     if (trackWrapper && productTrack) {
-        let isInteracting = false;
-        let isDragging = false;
-        let startX, startScrollLeft;
         let resumeTimeout;
-        const desktopSpeed = 0.85;
-        const mobileSpeed = 0.6;
         const pauseDuration = 1200; // ms
 
-        // Seam matching logic (Triple Set Reset)
-        const getSetWidth = () => productTrack.scrollWidth / 3;
-        let setWidth = getSetWidth();
-        window.addEventListener('resize', throttle(() => { setWidth = getSetWidth(); }, 200));
-
-        // Initial Position: Start at the middle set (Set B)
-        window.addEventListener('load', () => {
-            trackWrapper.scrollLeft = setWidth;
-        });
-
-        // Auto-Scroll Loop
-        const autoScroll = () => {
-            if (!isInteracting && !isDragging) {
-                const isMob = window.innerWidth <= 768;
-                const currentSpeed = isMob ? mobileSpeed : desktopSpeed;
-
-                // On desktop we respect the wheel smoothing engine; on mobile we scroll continuously
-                if (isMob || !isSmoothing) {
-                    trackWrapper.scrollLeft += currentSpeed;
-                }
-            }
-            requestAnimationFrame(autoScroll);
-        };
-
-        const markInteraction = () => {
-            isInteracting = true;
+        const pauseMarquee = () => {
+            productTrack.classList.add('is-paused');
             clearTimeout(resumeTimeout);
-            resumeTimeout = setTimeout(() => { isInteracting = false; }, pauseDuration);
+            resumeTimeout = setTimeout(() => {
+                productTrack.classList.remove('is-paused');
+            }, pauseDuration);
         };
 
-        // Manual Interaction: Click + Drag
+        // Interactions that should pause the CSS animation
+        trackWrapper.addEventListener('touchstart', pauseMarquee, { passive: true });
+        trackWrapper.addEventListener('touchmove', pauseMarquee, { passive: true });
+        trackWrapper.addEventListener('wheel', pauseMarquee, { passive: true });
+        trackWrapper.addEventListener('scroll', pauseMarquee, { passive: true });
+
+        // Pointer-based drag (mostly for desktop mouse users)
+        let isDragging = false;
+        let startX, startScrollLeft;
+
         trackWrapper.addEventListener('pointerdown', (e) => {
+            if (e.pointerType === 'touch') return;
             isDragging = true;
-            markInteraction();
+            pauseMarquee();
             startX = e.pageX - trackWrapper.offsetLeft;
             startScrollLeft = trackWrapper.scrollLeft;
             trackWrapper.classList.add('is-dragging');
@@ -170,78 +153,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         trackWrapper.addEventListener('pointermove', (e) => {
             if (!isDragging) return;
-            e.preventDefault();
             const x = e.pageX - trackWrapper.offsetLeft;
-            const walk = (x - startX) * 1.5; // Drag sensitivity
+            const walk = (x - startX) * 1.5;
             trackWrapper.scrollLeft = startScrollLeft - walk;
-            markInteraction();
+            pauseMarquee();
         });
 
-        trackWrapper.addEventListener('pointerup', (e) => {
+        const stopDragging = (e) => {
             isDragging = false;
             trackWrapper.classList.remove('is-dragging');
-            trackWrapper.releasePointerCapture(e.pointerId);
-        });
-
-        trackWrapper.addEventListener('pointercancel', (e) => {
-            isDragging = false;
-            trackWrapper.classList.remove('is-dragging');
-            trackWrapper.releasePointerCapture(e.pointerId);
-        });
-
-        // Wheel / Trackpad Smoothing Engine
-        let targetScrollX = 0;
-        let currentScrollX = 0;
-        let isSmoothing = false;
-
-        const smoothWheel = () => {
-            const diff = targetScrollX - trackWrapper.scrollLeft;
-            if (Math.abs(diff) > 0.5) {
-                trackWrapper.scrollLeft += diff * 0.1; // Easing factor
-                requestAnimationFrame(smoothWheel);
-            } else {
-                isSmoothing = false;
-            }
+            if (e.pointerId) trackWrapper.releasePointerCapture(e.pointerId);
         };
 
-        trackWrapper.addEventListener('wheel', (e) => {
-            // Horizontal intent check: If vertical delta is much larger, let the page scroll
-            if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && Math.abs(e.deltaY) > 5) {
-                return;
-            }
+        trackWrapper.addEventListener('pointerup', stopDragging);
+        trackWrapper.addEventListener('pointercancel', stopDragging);
 
-            e.preventDefault();
-            markInteraction();
-
-            // Accumulate target
-            const delta = e.deltaX !== 0 ? e.deltaX : e.deltaY;
-            targetScrollX = trackWrapper.scrollLeft + delta * 2;
-
-            if (!isSmoothing) {
-                isSmoothing = true;
-                requestAnimationFrame(smoothWheel);
-            }
-        }, { passive: false });
-
-        // Mobile Touch Support (Native Scroll)
-        trackWrapper.addEventListener('touchstart', markInteraction, { passive: true });
-        trackWrapper.addEventListener('touchmove', markInteraction, { passive: true });
-
-        // Bidirectional Infinite Loop Logic
-        trackWrapper.addEventListener('scroll', () => {
-            // If we drift too far left (into Set A), jump to Set B
-            if (trackWrapper.scrollLeft < setWidth * 0.5) {
-                trackWrapper.scrollLeft += setWidth;
-                targetScrollX += setWidth; // Sync smoothing engine
-            }
-            // If we drift too far right (into Set C), jump back to Set B
-            else if (trackWrapper.scrollLeft > setWidth * 1.5) {
-                trackWrapper.scrollLeft -= setWidth;
-                targetScrollX -= setWidth; // Sync smoothing engine
-            }
-        }, { passive: true });
-
-        requestAnimationFrame(autoScroll);
+        console.log("Marquee CSS Controller initialized.");
     }
 
     // --------------------------------------------------------------------------

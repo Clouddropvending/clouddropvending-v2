@@ -1068,15 +1068,21 @@ input[type="range"]::-webkit-slider-thumb:hover {
     max-width: var(--container-width);
     margin: 0 auto;
     overflow-x: auto;
-    /* Enable native horizontal scroll */
     overflow-y: hidden;
     padding: 20px 0;
-    touch-action: pan-y;
+
+    /* CURATED MARQUEE REWORK: Stable CSS Transform Engine */
+    --marquee-duration: 45s;
+
+    touch-action: pan-x;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-behavior: auto;
+    will-change: scroll-position;
 
     /* Native Scroll Settings - Hide Bar */
     scrollbar-width: none;
     -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
 
     /* Edge Fade Mask */
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
@@ -1090,11 +1096,46 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .product-track {
     display: flex;
     flex-wrap: nowrap;
-    gap: 18px;
-    padding: 0 18px 24px 18px;
     width: max-content;
-    user-select: none;
-    /* Prevent text selection during drag */
+    padding: 0 0 24px 0;
+
+    /* CURATED MARQUEE REWORK: CSS Animation */
+    animation: marquee var(--marquee-duration) linear infinite;
+    will-change: transform;
+}
+
+/* Pause state triggered by JS */
+.product-track.is-paused {
+    animation-play-state: paused !important;
+}
+
+.product-group {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 18px;
+    padding: 0 9px;
+    /* Half gap to create even spacing between groups */
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .product-track {
+        animation: none !important;
+    }
+}
+
+user-select: none;
+/* Prevent text selection during drag */
 }
 
 .product-track:hover {
