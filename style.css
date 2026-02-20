@@ -1146,6 +1146,20 @@ input[type="range"]::-webkit-slider-thumb:hover {
     flex-wrap: nowrap !important;
     width: max-content !important;
     user-select: none;
+    will-change: transform;
+}
+
+.curated-carousel-track .product-group {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    flex: 0 0 auto !important;
+    /* critical: stop iPhone flex shrink/wrap */
+    width: max-content !important;
+}
+
+.curated-carousel-track .product-card {
+    flex: 0 0 auto !important;
+    /* critical: cards never shrink */
 }
 
 .product-group {
@@ -2282,11 +2296,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
         padding: 20px 0 30px;
     }
 
-    .curated-carousel-track {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        /* No padding/gap here to avoid loop reset calculation errors */
-    }
 
     .product-card {
         flex: 0 0 230px;
