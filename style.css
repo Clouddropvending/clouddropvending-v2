@@ -1142,19 +1142,25 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .curated-carousel-track {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    width: max-content !important;
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
     user-select: none;
     will-change: transform;
 }
 
+/* Curated carousel: consistent card sizing on desktop */
+.curated-carousel-track .product-card {
+    flex: 0 0 auto;
+    width: clamp(240px, 22vw, 300px);
+    /* tweak max if you want bigger cards */
+}
+
 .curated-carousel-track .product-group {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    flex: 0 0 auto !important;
-    /* critical: stop iPhone flex shrink/wrap */
-    width: max-content !important;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    /* key: prevents the duplicate group from dropping/wrapping */
 }
 
 .curated-carousel-track .product-card {

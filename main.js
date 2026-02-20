@@ -227,7 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
             sync();
             apply();
         });
-
+        window.addEventListener('load', () => {
+            sync();
+        });
         // Make transforms smooth
         track.style.willChange = 'transform';
 
