@@ -114,63 +114,133 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --------------------------------------------------------------------------
-    // 4. Horizontal Product Track - CSS Marquee Controller (CURATED MARQUEE REWORK)
     // --------------------------------------------------------------------------
-    const trackWrapper = document.querySelector('.product-track-wrapper');
-    const productTrack = document.querySelector('.product-track');
+    // --------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
+    // --------------------------------------------------------------------------
+    // Curated Essentials Carousel - TRANSFORM BASED + MANUAL DRAG
+    // --------------------------------------------------------------------------
+    const initCuratedCarousel = () => {
+        const scroller = document.querySelector('.curated-carousel-scroller');
+        const track = document.querySelector('.curated-carousel-track');
+        if (!scroller || !track) return;
 
-    if (trackWrapper && productTrack) {
-        let resumeTimeout;
-        const pauseDuration = 1200; // ms
+        const SPEED = 40; // px per second
 
-        const pauseMarquee = () => {
-            productTrack.classList.add('is-paused');
-            clearTimeout(resumeTimeout);
-            resumeTimeout = setTimeout(() => {
-                productTrack.classList.remove('is-paused');
-            }, pauseDuration);
+        let offset = 0;
+        let last = 0;
+        let isPaused = false;
+
+        // Manual drag state
+        let isDown = false;
+        let startX = 0;
+        let startOffset = 0;
+        let lastMoveTime = 0;
+
+        const firstGroup = track.querySelector('.product-group');
+        let groupWidth = 0;
+
+        const sync = () => {
+            if (!firstGroup) return;
+            groupWidth = firstGroup.getBoundingClientRect().width || 0;
         };
 
-        // Interactions that should pause the CSS animation
-        trackWrapper.addEventListener('touchstart', pauseMarquee, { passive: true });
-        trackWrapper.addEventListener('touchmove', pauseMarquee, { passive: true });
-        trackWrapper.addEventListener('wheel', pauseMarquee, { passive: true });
-        trackWrapper.addEventListener('scroll', pauseMarquee, { passive: true });
-
-        // Pointer-based drag (mostly for desktop mouse users)
-        let isDragging = false;
-        let startX, startScrollLeft;
-
-        trackWrapper.addEventListener('pointerdown', (e) => {
-            if (e.pointerType === 'touch') return;
-            isDragging = true;
-            pauseMarquee();
-            startX = e.pageX - trackWrapper.offsetLeft;
-            startScrollLeft = trackWrapper.scrollLeft;
-            trackWrapper.classList.add('is-dragging');
-            trackWrapper.setPointerCapture(e.pointerId);
-        });
-
-        trackWrapper.addEventListener('pointermove', (e) => {
-            if (!isDragging) return;
-            const x = e.pageX - trackWrapper.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            trackWrapper.scrollLeft = startScrollLeft - walk;
-            pauseMarquee();
-        });
-
-        const stopDragging = (e) => {
-            isDragging = false;
-            trackWrapper.classList.remove('is-dragging');
-            if (e.pointerId) trackWrapper.releasePointerCapture(e.pointerId);
+        const apply = () => {
+            // Keep offset in [0, groupWidth)
+            if (groupWidth > 0) {
+                offset = ((offset % groupWidth) + groupWidth) % groupWidth;
+            }
+            track.style.transform = `translate3d(${-offset}px, 0, 0)`;
         };
 
-        trackWrapper.addEventListener('pointerup', stopDragging);
-        trackWrapper.addEventListener('pointercancel', stopDragging);
+        const pause = () => {
+            isPaused = true;
+            clearTimeout(pause._t);
+            pause._t = setTimeout(() => (isPaused = false), 1500);
+        };
 
-        console.log("Marquee CSS Controller initialized.");
-    }
+        const loop = (t) => {
+            if (!last) last = t;
+            let dt = (t - last) / 1000;
+            last = t;
 
+            // Prevent big "jumps" if the tab was inactive / FPS drops
+            dt = Math.min(dt, 0.05);
+
+            if (!isPaused && !isDown && groupWidth > 0) {
+                offset += SPEED * dt;
+                apply();
+            }
+
+            requestAnimationFrame(loop);
+        };
+
+        // -------------------------
+        // Manual drag (pointer)
+        // -------------------------
+        const onPointerDown = (e) => {
+            pause();
+            isDown = true;
+            startX = e.clientX;
+            startOffset = offset;
+            lastMoveTime = performance.now();
+            scroller.setPointerCapture?.(e.pointerId);
+            scroller.classList.add('is-dragging');
+        };
+
+        const onPointerMove = (e) => {
+            if (!isDown) return;
+            const dx = e.clientX - startX;
+            // Dragging right should move content right (so offset decreases)
+            offset = startOffset - dx;
+            apply();
+            lastMoveTime = performance.now();
+        };
+
+        const onPointerUp = () => {
+            if (!isDown) return;
+            isDown = false;
+            scroller.classList.remove('is-dragging');
+
+            // small extra pause after finishing drag so it doesn't "snap back into auto"
+            clearTimeout(pause._t);
+            pause._t = setTimeout(() => (isPaused = false), 900);
+        };
+
+        scroller.addEventListener('pointerdown', onPointerDown, { passive: true });
+        scroller.addEventListener('pointermove', onPointerMove, { passive: true });
+        scroller.addEventListener('pointerup', onPointerUp, { passive: true });
+        scroller.addEventListener('pointercancel', onPointerUp, { passive: true });
+
+        // Wheel = manual scrub
+        scroller.addEventListener(
+            'wheel',
+            (e) => {
+                pause();
+                offset += e.deltaY * 0.6 + e.deltaX * 0.9;
+                apply();
+            },
+            { passive: true }
+        );
+
+        window.addEventListener('resize', () => {
+            sync();
+            apply();
+        });
+
+        // Make transforms smooth
+        track.style.willChange = 'transform';
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                sync();
+                apply();
+                requestAnimationFrame(loop);
+            });
+        });
+    };
+
+    initCuratedCarousel();
     // --------------------------------------------------------------------------
     // 5. Hero Cluster Parallax - Immersive Depth
     // --------------------------------------------------------------------------
