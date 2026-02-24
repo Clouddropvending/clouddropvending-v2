@@ -614,4 +614,134 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     initHolographicWorkspace();
+
+    // 11. Compliance Section Reveal Logic
+    const initComplianceReveal = () => {
+        const complianceItems = document.querySelectorAll('.compliance-item');
+        if (!complianceItems.length) return;
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    complianceItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('revealed');
+                        }, index * 200);
+                    });
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const complianceSection = document.querySelector('.compliance-section');
+        if (complianceSection) revealObserver.observe(complianceSection);
+    };
+
+    // 12. Page Continuity Logic (Scroll Progress & Shimmer)
+    const initPageContinuity = () => {
+        const progressBar = document.createElement('div');
+        progressBar.className = 'scroll-progress-bar';
+        document.body.appendChild(progressBar);
+
+        const updateContinuity = () => {
+            // Update Progress Bar
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            progressBar.style.width = scrolled + "%";
+
+            // Headline Shimmer Trigger
+            const headers = document.querySelectorAll('.section-header h2');
+            headers.forEach(header => {
+                const rect = header.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    header.classList.add('headline-shimmer');
+                } else {
+                    header.classList.remove('headline-shimmer');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', updateContinuity, { passive: true });
+        updateContinuity(); // Initial run
+    };
+
+    // 13. Signature Depth & Light Engine ("Impossible" Pass)
+    const initSignatureEngine = () => {
+        const isMobile = window.innerWidth <= 768;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (isMobile || prefersReducedMotion) return;
+
+        const ambientBg = document.querySelector('.ambient-bg');
+        const gridOverlay = document.querySelector('.grid-overlay');
+        const cursorLight = document.querySelector('.cursor-light-glow');
+        const tiltCards = document.querySelectorAll('.premium-tilt');
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let currentMouseX = mouseX;
+        let currentMouseY = mouseY;
+
+        let scrollY = window.scrollY;
+        let currentScrollY = scrollY;
+
+        // Global Mouse Tracker
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (cursorLight) cursorLight.classList.add('active');
+        }, { passive: true });
+
+        // Smooth Depth Loop (60fps)
+        const updateDepth = () => {
+            // Lerp Mouse
+            currentMouseX += (mouseX - currentMouseX) * 0.08;
+            currentMouseY += (mouseY - currentMouseY) * 0.08;
+
+            // Lerp Scroll
+            scrollY = window.scrollY;
+            currentScrollY += (scrollY - currentScrollY) * 0.08;
+
+            // 1. Cursor Light (Global CSS Vars)
+            document.documentElement.style.setProperty('--mouse-x', `${currentMouseX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${currentMouseY}px`);
+
+            // 2. Ambient Parallax (Deep Layers - Retained but restrained)
+            if (ambientBg) {
+                // Reduced factor as they now move with the section
+                ambientBg.style.transform = `translate3d(0, ${currentScrollY * 0.05}px, 0)`;
+            }
+            if (gridOverlay) {
+                gridOverlay.style.transform = `translate3d(0, ${currentScrollY * 0.02}px, 0)`;
+            }
+
+            // 3. Micro-Tilt Parallax
+            tiltCards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isHovered = (
+                    mouseX > rect.left && mouseX < rect.right &&
+                    mouseY > rect.top && mouseY < rect.bottom
+                );
+
+                if (isHovered) {
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const tiltX = (mouseY - centerY) / (rect.height / 2) * -3; // Max 3deg
+                    const tiltY = (mouseX - centerX) / (rect.width / 2) * 3;  // Max 3deg
+
+                    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                } else {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                }
+            });
+
+            requestAnimationFrame(updateDepth);
+        };
+
+        requestAnimationFrame(updateDepth);
+    };
+
+    initSignatureEngine();
+    initPageContinuity();
+    initComplianceReveal();
 });
