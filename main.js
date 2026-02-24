@@ -487,6 +487,131 @@ document.addEventListener('DOMContentLoaded', () => {
         hardwareCards.forEach(card => observer.observe(card));
     };
 
-    // Initialize all enhancements
-    if (typeof initMobileHardwareReveal === 'function') initMobileHardwareReveal();
+    // --------------------------------------------------------------------------
+    // 10. Holographic Workspace Interactions
+    // --------------------------------------------------------------------------
+    const initHolographicWorkspace = () => {
+        const workspace = document.querySelector('.holographic-workspace');
+        const panels = document.querySelectorAll('.holo-panel');
+        const core = document.querySelector('.holographic-core');
+        const connectionSvg = document.querySelector('.holo-connections');
+        const steps = document.querySelectorAll('.setup-step');
+
+        if (!workspace || !panels.length || !core || !connectionSvg) return;
+
+        // A. Continuous Scroll Progress Animation
+        const updateScrollProgress = () => {
+            const isMobile = window.innerWidth <= 768;
+            const viewportCenter = window.innerHeight / 2;
+            const coreRect = core.getBoundingClientRect();
+            const coreCenter = coreRect.top + coreRect.height / 2;
+
+            // Distance from viewport center
+            const distance = Math.abs(viewportCenter - coreCenter);
+
+            // How far from center before progress hits 0
+            const maxDistance = isMobile ? window.innerHeight * 0.6 : window.innerHeight * 0.45;
+
+            // Calculate progress (1 at center, 0 at maxDistance)
+            let progress = 1 - (distance / maxDistance);
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Apply easing
+            const easedProgress = Math.pow(progress, 1.5);
+
+            // Update CSS variable
+            workspace.style.setProperty('--lineProgress', easedProgress.toFixed(3));
+
+            // Reveal panels based on proximity
+            if (progress > 0.1) {
+                panels.forEach(p => p.classList.add('visible'));
+                steps.forEach((step, i) => {
+                    setTimeout(() => step.classList.add('active'), 200 + (i * 200));
+                });
+            }
+
+            if (!isMobile) updateConnections(easedProgress);
+        };
+
+        // B. Mouse Parallax (Desktop Only)
+        let mouseX = 0, mouseY = 0;
+        let currentX = 0, currentY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            if (window.innerWidth <= 768) return;
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
+        }, { passive: true });
+
+        const updateHoloStage = () => {
+            const isMobile = window.innerWidth <= 768;
+            updateScrollProgress();
+
+            if (!isMobile) {
+                currentX += (mouseX - currentX) * 0.05;
+                currentY += (mouseY - currentY) * 0.05;
+
+                panels.forEach(panel => {
+                    const depth = parseFloat(panel.getAttribute('data-parallax-depth')) || 0.2;
+                    const tx = currentX * 100 * depth;
+                    const ty = currentY * 100 * depth;
+
+                    panel.style.setProperty('--tx', `${tx}px`);
+                    panel.style.setProperty('--ty', `${ty}px`);
+                    panel.style.transform = `translate3d(var(--tx), var(--ty), var(--tz)) rotateY(${currentX * 10}deg) rotateX(${-currentY * 10}deg)`;
+                });
+
+                core.style.transform = `translate3d(${currentX * 20}px, ${currentY * 20}px, 0)`;
+            } else {
+                // Reset/Clear parallax transforms on mobile
+                panels.forEach(panel => {
+                    panel.style.transform = '';
+                    panel.style.setProperty('--tx', '0px');
+                    panel.style.setProperty('--ty', '0px');
+                });
+                core.style.transform = '';
+            }
+
+            requestAnimationFrame(updateHoloStage);
+        };
+
+        // C. Dynamic Connections with Dashoffset Integration
+        const updateConnections = (progress) => {
+            if (window.innerWidth <= 768) return;
+
+            const coreRect = core.getBoundingClientRect();
+            const svgRect = connectionSvg.getBoundingClientRect();
+
+            const centerX = (coreRect.left + coreRect.width / 2) - svgRect.left;
+            const centerY = (coreRect.top + coreRect.height / 2) - svgRect.top;
+
+            let paths = '';
+            panels.forEach((panel, i) => {
+                const pRect = panel.getBoundingClientRect();
+                const px = (pRect.left + pRect.width / 2) - svgRect.left;
+                const py = (pRect.top + pRect.height / 2) - svgRect.top;
+
+                const cp1x = centerX + (px - centerX) * 0.3;
+                const cp1y = centerY;
+
+                const dList = `M ${centerX} ${centerY} Q ${cp1x} ${cp1y} ${px} ${py}`;
+                const length = 400;
+                const offset = length * (1 - progress);
+
+                paths += `<path d="${dList}" 
+                          stroke="url(#lineGrad)" 
+                          stroke-width="1.5" 
+                          fill="none" 
+                          stroke-dasharray="${length}" 
+                          stroke-dashoffset="${offset}"
+                          opacity="${0.2 + (progress * 0.3)}" />`;
+            });
+            connectionSvg.innerHTML = connectionSvg.querySelector('defs').outerHTML + paths;
+        };
+
+        requestAnimationFrame(updateHoloStage);
+        window.addEventListener('resize', updateScrollProgress);
+    };
+
+    initHolographicWorkspace();
 });

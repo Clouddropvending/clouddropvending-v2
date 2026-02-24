@@ -1001,42 +1001,329 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
 }
 
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-top: 40px;
+/* -------------------------------------------------------------------------- */
+/* 4b. Holographic Workspace                                                  */
+/* -------------------------------------------------------------------------- */
+
+.holographic-workspace {
+    position: relative;
+    overflow: hidden;
+    perspective: 2000px;
 }
 
-.feature-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 32px 24px;
+.workspace-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    align-items: center;
 }
 
-.feature-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(0, 240, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.icon-box {
-    font-size: 2rem;
-    margin-bottom: 24px;
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
+.holographic-stage {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    margin: 40px 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.holographic-core {
+    position: relative;
+    z-index: 5;
+    width: 320px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.core-machine-img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.2));
+    animation: machineFloat 6s ease-in-out infinite alternate;
+}
+
+.machine-glow {
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle, var(--accent-blue-dim) 0%, transparent 70%);
+    opacity: 0.4;
+    filter: blur(40px);
+    z-index: -1;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+/* Orbiting Panels */
+.holographic-orbit {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transform-style: preserve-3d;
+}
+
+.holo-panel {
+    position: absolute;
+    width: 260px;
+    padding: 24px;
+    pointer-events: auto;
+    cursor: default;
+    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.8s var(--ease-out), opacity 0.8s var(--ease-out), border-color 0.3s;
+}
+
+.holo-panel.visible {
+    opacity: 1;
+    transform: translate3d(var(--tx, 0), var(--ty, 0), var(--tz, 0));
+}
+
+.holo-panel h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
     color: var(--accent-blue);
+}
+
+.holo-panel p {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.panel-icon {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+}
+
+/* Specific Panel Placements (Base positions) */
+.p1 {
+    top: 15%;
+    left: 10%;
+    --tx: 0;
+    --ty: 0;
+    --tz: 100px;
+    transition-delay: 0.1s;
+}
+
+.p2 {
+    top: 60%;
+    left: 5%;
+    --tx: 0;
+    --ty: 0;
+    --tz: 50px;
+    transition-delay: 0.3s;
+}
+
+.p3 {
+    top: 10%;
+    right: 10%;
+    --tx: 0;
+    --ty: 0;
+    --tz: 150px;
+    transition-delay: 0.2s;
+}
+
+.p4 {
+    top: 65%;
+    right: 5%;
+    --tx: 0;
+    --ty: 0;
+    --tz: 80px;
+    transition-delay: 0.4s;
+}
+
+/* Mobile Vertical Timeline (hidden by default, shown via media query) */
+.mobile-timeline {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--accent-blue-dim), var(--accent-blue), var(--accent-blue-dim), transparent);
+    z-index: 1;
+    box-shadow: 0 0 15px var(--accent-blue-dim);
+}
+
+.holo-connections {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.holo-connections path {
+    transition: stroke-dashoffset 0.1s linear, opacity 0.3s ease;
+    will-change: stroke-dashoffset, opacity;
+}
+
+/* Setup Sequence */
+.setup-sequence {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 60px;
+    padding: 40px 0;
+}
+
+.sequence-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.2) 20%, rgba(0, 240, 255, 0.2) 80%, transparent);
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+.setup-step {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    width: 200px;
+}
+
+.step-point {
+    width: 12px;
+    height: 12px;
+    background: var(--bg-dark);
+    border: 2px solid rgba(0, 240, 255, 0.4);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    position: relative;
+    background: var(--bg-dark);
+    box-shadow: 0 0 0 4px var(--bg-dark);
+    transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+
+.setup-step.active .step-point {
+    background: var(--accent-blue);
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 15px var(--accent-blue), 0 0 0 4px var(--bg-dark);
+}
+
+.step-num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.6;
+}
+
+.step-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+}
+
+.step-content p {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* Desktop Setup Sequence Enhancements */
+@media (min-width: 769px) {
+    .setup-sequence {
+        margin-top: 80px;
+    }
+
+    .sequence-line {
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4) 20%, rgba(0, 240, 255, 0.4) 80%, transparent);
+        box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+    }
+
+    .setup-step {
+        transition: transform 0.4s var(--ease-out);
+        cursor: default;
+    }
+
+    .step-point {
+        width: 14px;
+        height: 14px;
+        border-width: 2px;
+        transition: all 0.4s var(--ease-out);
+    }
+
+    .setup-step.active .step-point {
+        animation: dotPulse 3s ease-in-out infinite;
+        box-shadow: 0 0 20px var(--accent-blue), 0 0 0 4px var(--bg-dark);
+    }
+
+    .step-content h4 {
+        color: #fff;
+        text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        transition: all 0.4s var(--ease-out);
+        font-weight: 700;
+    }
+
+    .step-content p {
+        opacity: 0.85;
+        color: var(--text-main);
+    }
+
+    /* Hover Effects */
+    .setup-step:hover {
+        transform: translateY(-5px) scale(1.03);
+    }
+
+    .setup-step:hover .step-point {
+        border-color: var(--accent-blue);
+        box-shadow: 0 0 25px var(--accent-blue), 0 0 0 4px var(--bg-dark);
+        background: var(--accent-blue);
+    }
+
+    .setup-step:hover h4 {
+        color: var(--accent-blue);
+        text-shadow: 0 0 15px var(--accent-blue);
+    }
+}
+
+/* Animations */
+@keyframes machineFloat {
+    0% {
+        transform: translateY(0) rotate(-1deg);
+    }
+
+    100% {
+        transform: translateY(-15px) rotate(1deg);
+    }
+}
+
+@keyframes pulseGlow {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: scale(1.1);
+        opacity: 0.6;
+    }
+}
+
+@keyframes dotPulse {
+    0% {
+        box-shadow: 0 0 12px var(--accent-blue), 0 0 0 4px var(--bg-dark);
+    }
+
+    50% {
+        box-shadow: 0 0 25px var(--accent-blue), 0 0 0 4px var(--bg-dark);
+    }
+
+    100% {
+        box-shadow: 0 0 12px var(--accent-blue), 0 0 0 4px var(--bg-dark);
+    }
 }
 
 /* Product Showcase */
@@ -1721,106 +2008,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     }
 }
 
-/* Why Clubs Choose Us */
-.why-us {
-    text-align: center;
-}
-
-.benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-    margin-bottom: 40px;
-}
-
-.benefit-card {
-    padding: 32px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.benefit-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 12px;
-    color: var(--accent-blue);
-}
-
-.benefit-card p {
-    font-size: 1rem;
-}
-
-.outcomes-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    margin-top: 24px;
-}
-
-.separator {
-    color: var(--accent-blue);
-    opacity: 0.5;
-}
-
-/* How It Works */
-.how-it-works {
-    text-align: center;
-}
-
-.steps-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-}
-
-.step-card {
-    padding: 32px 28px 32px;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    min-height: 250px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.step-number {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    font-size: clamp(44px, 4vw, 58px);
-    font-weight: 700;
-    opacity: 0.05;
-    pointer-events: none;
-    z-index: 0;
-    line-height: 1;
-}
-
-.step-content {
-    position: relative;
-    z-index: 1;
-    padding-right: 76px;
-}
-
-.step-content h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.5rem;
-    line-height: 1.15;
-    max-width: calc(100% - 10px);
-}
-
-.step-content p {
-    color: var(--text-muted);
-}
+/* Old Why Us / How It Works styles removed - integrated into Holographic Workspace */
 
 /* FAQ / Accordion */
 .accordion {
@@ -2344,11 +2532,111 @@ input[type="range"]::-webkit-slider-thumb:hover {
         gap: 32px;
     }
 
-    .benefits-grid,
-    .steps-grid,
-    .features-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
+    .holographic-stage {
+        height: auto;
+        flex-direction: column;
+        gap: 40px;
+        padding-top: 20px;
+        perspective: none;
+        transform-style: flat;
+    }
+
+    .holographic-core {
+        width: 260px;
+        margin: 0 auto 40px;
+        position: relative;
+        z-index: 10;
+        order: -1;
+        /* Machine stays at the top */
+    }
+
+    /* Mobile Hub: Glowing Center Dot */
+    .holographic-core::after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 8px;
+        height: 8px;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        box-shadow: 0 0 15px var(--accent-blue), 0 0 30px var(--accent-blue-dim);
+        z-index: 11;
+    }
+
+    .holographic-orbit {
+        position: relative;
+        inset: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        width: 100%;
+        padding: 0 10px;
+        transform-style: flat;
+    }
+
+    .mobile-timeline {
+        display: block;
+        top: -65px;
+        /* Pull up to meet core hub dot */
+        height: calc(100% + 65px);
+    }
+
+    .holo-panel {
+        position: relative;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        width: 100%;
+        max-width: 100%;
+        transform: none !important;
+        opacity: 0;
+        margin-bottom: 0;
+        z-index: 5;
+    }
+
+    .holo-panel.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .holo-connections {
+        display: none;
+    }
+
+    .setup-sequence {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 48px;
+        padding-left: 20px;
+    }
+
+    .sequence-line {
+        width: 2px;
+        height: 100%;
+        left: 25px;
+        /* Aligned with step-point */
+        top: 0;
+        transform: none;
+        background: linear-gradient(to bottom, transparent, rgba(0, 240, 255, 0.4) 10%, rgba(0, 240, 255, 0.4) 90%, transparent);
+    }
+
+    .setup-step {
+        width: 100%;
+        display: flex;
+        gap: 20px;
+        text-align: left;
+    }
+
+    .step-point {
+        margin: 0;
+        flex-shrink: 0;
+        top: 8px;
+    }
+
+    .step-content {
+        padding-right: 0;
     }
 
     .benefit-card,
