@@ -2912,3 +2912,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
         padding-top: 24px;
     }
 }
+
+.hardware-card {
+    cursor: default;
+}
