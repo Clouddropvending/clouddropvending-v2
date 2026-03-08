@@ -747,6 +747,94 @@ p {
     border-radius: 4px;
 }
 
+/* -------------------------------------------------------------------------- */
+/* 4. Community Impact Section                                                */
+/* -------------------------------------------------------------------------- */
+
+.community-section {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.community-copy {
+    color: var(--text-muted);
+    font-size: 1.125rem;
+    max-width: 800px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.community-card {
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.community-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 240, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 240, 255, 0.15);
+}
+
+.community-logo {
+    max-height: 40px;
+    max-width: 160px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    filter: brightness(0) invert(1) opacity(0.8); /* Converts logos to standard white, assuming original inputs might vary or need to look premium */
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.community-card:hover .community-logo {
+    filter: brightness(0) invert(1) opacity(1);
+    transform: scale(1.05);
+}
+
+/* Specific constraint for wider Mission Possible logo */
+.community-card:nth-child(2) .community-logo {
+    max-width: 140px;
+}
+
+@media (max-width: 992px) {
+    .community-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .community-section.section-padding {
+        padding: 60px 0;
+    }
+
+    .community-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 0 16px;
+    }
+    
+    .community-card {
+        min-height: 90px;
+        padding: 16px;
+    }
+}
+
 /* Revenue Calculator */
 .calculator-container {
     display: grid;
@@ -813,7 +901,7 @@ p {
 /* Range Slider Styling */
 input[type="range"] {
     position: relative;
-    -webkit-appearance: none;
+ webkit-appearance: none;
     width: 100%;
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
