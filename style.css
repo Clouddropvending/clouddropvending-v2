@@ -799,7 +799,8 @@ p {
     height: auto;
     object-fit: contain;
     object-position: center;
-    filter: brightness(0) invert(1) opacity(0.8); /* Converts logos to standard white, assuming original inputs might vary or need to look premium */
+    filter: brightness(0) invert(1) opacity(0.8);
+    /* Converts logos to standard white, assuming original inputs might vary or need to look premium */
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
@@ -829,7 +830,7 @@ p {
         gap: 12px;
         padding: 0 16px;
     }
-    
+
     .community-card {
         min-height: 90px;
         padding: 16px;
@@ -902,7 +903,7 @@ p {
 /* Range Slider Styling */
 input[type="range"] {
     position: relative;
- webkit-appearance: none;
+    webkit-appearance: none;
     width: 100%;
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
@@ -3520,4 +3521,69 @@ section::after,
 .hero {
     position: relative;
     overflow: hidden;
+}
+
+/* ============================= */
+/* HERO MACHINE (Everything, Handled) */
+/* ============================= */
+
+.hero-machine-wrap {
+    width: 420px;
+    max-width: 420px;
+    margin: 0 auto;
+}
+
+.hero-machine-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+
+
+/* ============================= */
+/* HARDWARE MACHINE (Hardware section) */
+/* ============================= */
+
+.hardware-machine-wrap {
+    width: 260px;
+    max-width: 260px;
+    margin: 0 auto;
+}
+
+.hardware-machine-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+
+
+/* ============================= */
+/* MOBILE ADJUSTMENTS */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+    #hardware .card-visual img,
+    #hardware .hardware-img,
+    #hardware .hardware-machine-img {
+        width: 125px !important;
+        max-width: 125px !important;
+        height: auto !important;
+        display: block !important;
+        margin: 0 auto !important;
+        object-fit: contain !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    #hardware .card-visual {
+        padding: 35px 25px !important;
+        min-height: 240px !important;
+    }
+
 }
