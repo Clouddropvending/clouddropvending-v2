@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const calc = {
         inputs: [
             'guests_per_night', 'nights_per_week', 'purchase_rate',
-            'group_prevent_rate', 'avg_group_size'
+            'group_prevent_rate', 'avg_group_size', 'avg_bar_spend'
         ],
         init() {
             const container = document.querySelector('.revenue-calculator');
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Retention Model Parameters
             const gPrevent = val('group_prevent_rate') / 100;
             const gSize = val('avg_group_size');
-            const spendRetained = 10; // Fixed typical value to reduce mobile clutter
+            const spendRetained = val('avg_bar_spend'); // Replaces fixed typical value
 
             // 1. Revenue Share
             const buyersPerNight = guests * pRate;
@@ -424,7 +424,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. Group Retention
             const preventedGroups = buyersPerNight * gPrevent;
             const retainedGuests = preventedGroups * gSize;
-            const addedBarRevPerNight = retainedGuests * spendRetained;
+            
+            // Assume only a portion (40%) of retained guests will make an additional bar purchase
+            const barConversionRate = 0.4;
+            const purchasingRetainedGuests = retainedGuests * barConversionRate;
+            
+            const addedBarRevPerNight = purchasingRetainedGuests * spendRetained;
             const monthlyBarRev = addedBarRevPerNight * nights * 4.33;
 
             // 3. Totals

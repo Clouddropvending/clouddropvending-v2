@@ -299,6 +299,16 @@
                 <input type="range" id="avg_group_size" min="2.0" max="6.0" step="0.1" value="3.0">
                 <p class="helper-text">Typical: 2.5–3.5 persons per group.</p>
               </div>
+
+              <!-- Compact Average Bar Spend Assumption -->
+              <div class="calc-input compact-input" style="margin-bottom: 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
+                <div class="label-row" style="margin-bottom: 6px;">
+                  <label for="avg_bar_spend" style="font-size: 0.9rem;">Average Bar Spend <span style="opacity:0.6;font-weight:400;">($)</span></label>
+                  <input type="number" id="avg_bar_spend_val" step="1" value="25" style="width: 50px; font-size: 0.9rem; padding: 4px;">
+                </div>
+                <input type="range" id="avg_bar_spend" min="5" max="100" step="5" value="25" style="height: 4px;">
+                <p class="helper-text" style="margin-top: 6px; font-size: 0.75rem;">Estimated average guest bar tab.</p>
+              </div>
             </div>
 
             <details class="assumptions-note glass-panel">
